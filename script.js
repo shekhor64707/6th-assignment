@@ -93,7 +93,7 @@ const plants=()=>{
                    <img  class="w-full h-40 object-cover rounded-[5px]"src="${plantImage}" alt="Shoes" />
                  </figure>
                 <div class="p-4">
-                    <h2 class="card-title">${plantName}</h2>
+                    <h2 class="card-title cardName">${plantName}</h2>
                     <p>${plantDescription}</p>
                     <div class="cost flex justify-between my-2 items-center">
                         <span class="bg-[#DCFCE7] p-1 rounded-[10px] text-[#15803D] font-semibold">${plantCategory}</span>
@@ -115,3 +115,50 @@ const plants=()=>{
 plants();
 
 // side bar option 
+
+
+// modal making///
+
+
+// modal elements
+var modal = document.getElementById("modal-0");
+var modalTitle = document.getElementById("modalTitle");
+var modalImg = document.getElementById("modalImg");
+var modalDesc = document.getElementById("modalDesc");
+var modalClose = document.getElementById("modalClose");
+
+// attach listener to the container of all cards
+document.querySelector(".cards").addEventListener("click", function(e) {
+  if (e.target.classList.contains("card-title")) {
+    // step up in DOM without closest()
+    var p4 = e.target.parentElement;    
+    var card = p4.parentElement;       
+    var imgEl = card.querySelector("img");
+    var descEl = p4.querySelector("p");
+
+    // fill modal content
+    modalTitle.textContent = e.target.textContent;
+    if (imgEl) {
+      modalImg.src = imgEl.src;
+    }
+    if (descEl) {
+      modalDesc.textContent = descEl.textContent;
+    }
+
+    // show modal
+    modal.style.display = "flex";
+  }
+});
+
+// close modal on button
+modalClose.addEventListener("click", function() {
+  modal.style.display = "none";
+});
+
+// close modal when clicking outside the box
+modal.addEventListener("click", function(e) {
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+});
+
